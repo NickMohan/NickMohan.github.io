@@ -22,9 +22,17 @@
     <color rgba="1 1 1 1"/>
   </material>
 
+
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace>/robot</robotNamespace>
+        </plugin>
+    </gazebo>
+
     <gazebo reference="base">
       <material>Gazebo/Black</material>
     </gazebo>
+
 
     <link name="base">
       <visual>
@@ -939,4 +947,27 @@
         <parent link="arm_claw"/>
         <child link="arm_hook"/>
     </joint>
+
+
+    <transmission name="right_motor_and_axel_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="right_motor_and_axel">
+          <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="motor1">
+            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="left_motor_and_axel_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="left_motor_and_axel">
+          <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="motor2">
+          <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+          <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+
 </robot>
